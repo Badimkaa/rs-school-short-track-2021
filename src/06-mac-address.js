@@ -12,8 +12,22 @@
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-function isMAC48Address(/* n */) {
-  throw new Error('Not implemented');
+function isMAC48Address (n) {
+  const hyphenIndex = [2, 5, 8, 11, 14];
+  let flag = true;
+  for (let i = 0; i < n.length; i++) {
+    if (hyphenIndex.includes(i)) {
+      if (n[i] !== '-') {
+        flag = false;
+      }
+      break;
+    } else if (!((n.charCodeAt(i) >= 48 && n.charCodeAt(i) <= 57)
+     || (n.charCodeAt(i) >= 65 && n.charCodeAt(i) <= 70))) {
+      flag = false;
+      break;
+    }
+  }
+  return flag;
 }
 
 module.exports = isMAC48Address;
